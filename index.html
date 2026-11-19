@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Imran Rafi</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="style.css"
+    />
+  </head>
+  <body>
+    <!-- Background video with sound. To change the video, edit the src below. -->
+    <video
+      id="bgVideo"
+      class="bg-video"
+      src="files/spaidert man.mp4"
+      autoplay
+      loop
+      playsinline
+      preload="auto"
+    ></video>
+    <div class="bg-overlay"></div>
+
+    <main class="page">
+      <!-- Big profile photo with aura animation -->
+      <!-- data-photos: comma-separated photo paths | data-interval: milliseconds (2000 = 2 seconds) -->
+      <section class="hero reveal">
+        <div class="avatar-wrap big">
+          <div class="aura"></div>
+          <div class="ring-glow"></div>
+          <img
+            class="avatar js-photo"
+            src="files/imam%20rafi.jpg"
+            data-photos="files/imam%20rafii.jpg,files/imam%20rafi.jpg"
+            data-interval="2000"
+            alt="Imran Rafi"
+          />
+        </div>
+      </section>
+
+      <!-- Profile box: small photo + name + bio -->
+    <section class="profile-card reveal">
+  <div class="avatar-wrap small">
+    <div class="aura small-aura"></div>
+    <img class="avatar js-photo"
+         src="files/imam%20rafi.jpg"
+         data-photos="files/imam%20rafi.jpg,files/imam%20rafii.jpg"
+         data-interval="2000"
+         alt="">
+  </div>
+  <div class="profile-text">
+    <h1 class="name">Imran Rafi</h1>
+    <p class="bio">WANNA F8¿🐊</p>
+  </div>
+
+  <!-- Background music play/pause button -->
+  <button id="musicBtn" class="music-btn" type="button" aria-label="Play or pause music">
+    <i id="musicIcon" class="fa-solid fa-pause"></i>
+  </button>
+</section>
+
+      <!-- Social links -->
+      <nav class="links reveal">
+        <!-- Discord: opens a popup with Add Friend and Join Server -->
+        <button
+          id="discordBtn"
+          class="link-btn"
+          type="button"
+          aria-label="Discord"
+        >
+          <i class="fa-brands fa-discord"></i>
+        </button>
+
+        <a
+          class="link-btn"
+          href="https://wa.me/8801336314666"
+          target="_blank"
+          rel="noopener"
+          aria-label="WhatsApp"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a
+          class="link-btn"
+          href="https://t.me/+8801860181109"
+          target="_blank"
+          rel="noopener"
+          aria-label="Telegram"
+        >
+          <i class="fa-brands fa-telegram"></i>
+        </a>
+        <a
+          class="link-btn"
+          href="https://www.tiktok.com/@r4a_7u"
+          target="_blank"
+          rel="noopener"
+          aria-label="TikTok"
+        >
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+
+        <a
+          class="link-btn"
+          href="https://www.facebook.com/share/1EjWuhpBhR/"
+          target="_blank"
+          rel="noopener"
+          aria-label="Facebook"
+        >
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+
+        <a
+          class="link-btn"
+          href="https://open.spotify.com/user/31hu3ykobanxskj6czdxpk2vvejy"
+          target="_blank"
+          rel="noopener"
+          aria-label="Spotify"
+        >
+          <i class="fa-brands fa-spotify"></i>
+        </a>
+
+        <!-- Games: opens the Free Fire UID popup -->
+        <button
+          id="ffBtn"
+          class="link-btn"
+          type="button"
+          aria-label="Free Fire UID"
+        >
+          <i class="fa-solid fa-gamepad"></i>
+        </button>
+      </nav>
+    </main>
+
+    <!-- Discord popup -->
+    <!-- PASTE YOUR DISCORD USER ID inside data-user-id="" below (17 to 20 digits) -->
+    <div
+      id="discordModal"
+      class="modal"
+      aria-hidden="true"
+    >
+      <div class="modal-card">
+        <p class="modal-title">Discord</p>
+
+        <a
+          id="optFriend"
+          class="opt-btn"
+          data-user-id="1572674418868748360"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="opt-icon"><i class="fa-solid fa-user-plus"></i></span>
+          <span class="opt-text">
+            <strong>Add Friend</strong>
+            <small>Send a friend request</small>
+          </span>
+        </a>
+
+        <a
+          id="optServer"
+          class="opt-btn"
+          href="https://discord.gg/kph2DrCW8M"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="opt-icon"><i class="fa-solid fa-users"></i></span>
+          <span class="opt-text">
+            <strong>Join Server</strong>
+            <small>Join the Discord server</small>
+          </span>
+        </a>
+
+        <button
+          class="modal-btn"
+          type="button"
+          data-close="discordModal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Free Fire UID popup -->
+    <!-- To change the UID, edit the number inside the uidText element below -->
+    <div
+      id="ffModal"
+      class="modal"
+      aria-hidden="true"
+    >
+      <div class="modal-card ff-card">
+        <p class="modal-title">Free Fire UID</p>
+        <p
+          class="uid"
+          id="uidText"
+        >
+          9553394258
+        </p>
+        <div class="modal-actions">
+          <button
+            id="copyBtn"
+            class="modal-btn"
+            type="button"
+          >
+            Copy
+          </button>
+          <button
+            class="modal-btn"
+            type="button"
+            data-close="ffModal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+  
+
+    <script
+      src="script.js"
+      defer
+    ></script>
+  </body>
+</html>

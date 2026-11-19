@@ -1,0 +1,509 @@
+:root {
+  --bg-dark: #1a1333;
+  --bg-mid: #2a1d4f;
+  --accent: #a78bfa;
+  --accent-green: #7dd3c0;
+  --gold-1: #f5d26b;
+  --gold-2: #fff1b8;
+  --gold-3: #d4a017;
+  --text: #f3efff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  background: linear-gradient(160deg, var(--bg-dark), var(--bg-mid));
+  overflow-x: hidden;
+}
+
+/* ---------- Background video (light blur) ---------- */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  filter: blur(3px);
+  transform: scale(1.02);
+}
+
+/* Light dark overlay on top of the video */
+.bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+              linear-gradient(160deg, rgba(42, 24, 80, 0.45), rgba(18, 44, 46, 0.4));
+}
+
+body.no-video .bg-video {
+  display: none;
+}
+
+/* ---------- Layout ---------- */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 40px 20px;
+}
+
+/* ---------- Avatar + aura ---------- */
+.avatar-wrap {
+  position: relative;
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite;
+}
+
+.avatar-wrap.big {
+  width: 190px;
+  height: 190px;
+}
+
+.avatar-wrap.small {
+  width: 74px;
+  height: 74px;
+  flex-shrink: 0;
+}
+
+.aura {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(167, 139, 250, 0.6) 0%,
+    rgba(125, 211, 192, 0.2) 45%,
+    transparent 70%
+  );
+  filter: blur(6px);
+  animation: pulse 2.5s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.small-aura {
+  inset: -14px;
+  animation-duration: 2s;
+}
+
+.ring-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #a78bfa, #7dd3c0, #c084fc, #60a5fa, #a78bfa);
+  filter: blur(8px);
+  animation: spin 4s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.avatar {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-dark);
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.6);
+  transition: opacity 0.6s ease;
+}
+
+/* ---------- Profile box ---------- */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 340px;
+  padding: 14px 22px 14px 16px;
+  border-radius: 30px;
+  background: rgba(20, 70, 80, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(125, 211, 192, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.profile-text {
+  min-width: 0;
+}
+
+.name {
+  margin: 0;
+  font-family: "Cinzel Decorative", Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--gold-3), var(--gold-2), var(--gold-1), var(--gold-3));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(245, 210, 107, 0.55));
+  animation: shimmer 4s linear infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bio {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #d3b8ff;
+  letter-spacing: 1px;
+  word-break: break-word;
+}
+
+/* ---------- Link buttons ---------- */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 360px;
+}
+
+.link-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: #efe9ff;
+  font-size: 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.link-btn:hover,
+.link-btn:focus-visible {
+  transform: translateY(-4px) scale(1.06);
+  background: rgba(167, 139, 250, 0.25);
+  box-shadow: 0 10px 24px rgba(125, 211, 192, 0.35);
+  outline: none;
+}
+
+/* ---------- Modal ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 5, 25, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 300px;
+  padding: 24px 22px;
+  border-radius: 22px;
+  text-align: center;
+  background: linear-gradient(160deg, rgba(42, 29, 79, 0.96), rgba(18, 44, 46, 0.96));
+  border: 1px solid rgba(167, 139, 250, 0.4);
+  animation: pop 0.35s ease both;
+}
+
+.modal-title {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
+.modal-btn {
+  margin-top: 14px;
+  padding: 9px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(125, 211, 192, 0.5);
+  background: rgba(125, 211, 192, 0.15);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-btn:hover {
+  background: rgba(125, 211, 192, 0.3);
+}
+
+/* ---------- Discord options (animated) ---------- */
+.opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  margin-top: 10px;
+  border-radius: 16px;
+  text-align: left;
+  color: var(--text);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  opacity: 0;
+  animation: slideIn 0.45s ease forwards;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.opt-btn:nth-of-type(1) {
+  animation-delay: 0.1s;
+}
+
+.opt-btn:nth-of-type(2) {
+  animation-delay: 0.22s;
+}
+
+.opt-btn:hover {
+  transform: translateX(4px);
+  background: rgba(88, 101, 242, 0.3);
+  box-shadow: 0 8px 20px rgba(88, 101, 242, 0.3);
+}
+
+.opt-btn.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.opt-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(88, 101, 242, 0.45);
+  font-size: 1.1rem;
+}
+
+.opt-text strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.opt-text small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+/* ---------- Free Fire card ---------- */
+.ff-card {
+  border: 1px solid rgba(255, 170, 60, 0.6);
+}
+
+.ff-card .modal-title {
+  color: #ffb347;
+}
+
+.uid {
+  margin: 0 0 16px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.modal-actions .modal-btn {
+  margin-top: 0;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .avatar-wrap.big {
+    width: 160px;
+    height: 160px;
+  }
+
+  .name {
+    font-size: 1.15rem;
+  }
+
+  .link-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .avatar-wrap,
+  .aura,
+  .ring-glow,
+  .name,
+  .modal-card,
+  .opt-btn {
+    animation: none;
+  }
+
+  .opt-btn {
+    opacity: 1;
+  }
+
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+/* ---------- Music button ---------- */
+.music-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(167, 139, 250, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #efe9ff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.music-btn:hover,
+.music-btn:focus-visible {
+  transform: scale(1.08);
+  background: rgba(167, 139, 250, 0.3);
+  box-shadow: 0 8px 20px rgba(125, 211, 192, 0.35);
+  outline: none;
+}/* ---------- Music button (inside profile box) ---------- */
+.music-btn {
+  flex-shrink: 0;
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(125, 211, 192, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #efe9ff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.music-btn:hover,
+.music-btn:focus-visible {
+  transform: scale(1.08);
+  background: rgba(125, 211, 192, 0.3);
+  box-shadow: 0 6px 16px rgba(125, 211, 192, 0.35);
+  outline: none;
+}
